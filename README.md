@@ -7,3 +7,4 @@
 ![alt text](heartbeat.gif)
 
 3. 旋转边框
+![alt text](rotateborder.gif)
