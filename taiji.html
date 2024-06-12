@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>太极图</title>
+		<style>
+			body {
+				background-color: #eee;
+			}
+
+			.taiji {
+				width: 100px;
+				height: 100px;
+				margin: auto;
+			}
+
+			.taiji .circle.white {
+				height: 50px;
+				background-color: white;
+				border-radius: 50px 50px 0 0;
+				position: relative;
+			}
+			.taiji .circle.black {
+				height: 50px;
+				background-color: black;
+				border-radius: 0 0 50px 50px;
+				position: relative;
+			}
+
+			.taiji .circle.white .small-circle.black {
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				background-color: black;
+				border-radius: 50%;
+				transform: translateY(50%);
+			}
+			.taiji .circle.black .small-circle.white {
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				background-color: white;
+				border-radius: 50%;
+				right: 0;
+				transform: translateY(-50%);
+			}
+
+			.taiji .circle.black .small-circle.white .center-circle.white {
+				width: 15px;
+				height: 15px;
+				background-color: white;
+				position: absolute;
+				top: 50%;
+				left: -50%;
+				transform: translate(-50%, -50%);
+				z-index: 100;
+				border-radius: 50%;
+				/* 产生的 BFC 被遮挡了 */
+				/* 变换原有的html结构 */
+			}
+			.taiji .circle.black .small-circle.white .center-circle.black {
+				width: 15px;
+				height: 15px;
+				background-color: black;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 50%;
+			}
+
+			.control {
+				text-align: center;
+				margin: 10px;
+			}
+			@keyframes rotate {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="control">
+			<button>暂停</button>
+		</div>
+		<div class="taiji">
+			<div class="circle white">
+				<div class="small-circle black"></div>
+			</div>
+			<div class="circle black">
+				<div class="small-circle white">
+					<div class="center-circle white"></div>
+					<div class="center-circle black"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		let el = document.querySelector("button");
+		let target = document.querySelector(".taiji");
+
+		const rotateFrames = new KeyframeEffect(
+			target,
+			[
+				{ transform: 'rotate(0deg)' },
+				{ transform: 'rotate(360deg)'},
+			],
+			{
+				duration: 4000, fill: 'forwards', easing: 'linear', iterations: Infinity,
+			}
+		)
+		const rotateAnimation = new Animation(rotateFrames, document.timeline);
+
+		rotateAnimation.play(); // 初始化播放动画
+		el.addEventListener("click", () => {
+			if (el.innerText === "开启") {
+				// target.style.animation = 'rotate 4s linear infinite'  // 直接用js 添加移除样式动画，暂停回到初始状态了，不好
+				rotateAnimation.play();
+				el.innerText = "暂停";
+			} else {
+				// target.style.animation = 'inherit'
+				rotateAnimation.pause();
+				el.innerText = "开启";
+			}
+		});
+	</script>
+</html>
