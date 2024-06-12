@@ -8,3 +8,6 @@
 
 3. 旋转边框
 ![alt text](rotateborder.gif)
+
+4. 涟漪动画
+![alt text](ripple.gif)

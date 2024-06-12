@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>涟漪图</title>
+		<style>
+			body {
+				background-color: #eee;
+			}
+			.container {
+				background-color: #107bf7;
+				width: 400px;
+				height: 400px;
+				margin: auto;
+				margin-top: 20px;
+				position: relative;
+			}
+			.logo {
+				background-image: url(./logo.png);
+				background-repeat: no-repeat;
+				height: 80px;
+				width: 80px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				/* animation: rippleKF 7.5s infinite linear; */
+			}
+
+			.ripple {
+				display: block;
+				width: 120px;
+				height: 120px;
+				filter: alpha(opacity=0);
+				opacity: 0;
+				border: solid 1px #32a7f5;
+				border-color: rgba(55, 183, 246, 0.8);
+				border-radius: 100px;
+				box-shadow: 0 0 70px rgba(55, 183, 246, 0.9) inset;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				animation: rippleKF 7.5s infinite linear;
+			}
+			.ripple-1 {
+				animation-delay: 0;
+			}
+			.ripple-2 {
+				animation-delay: 2.5s;
+			}
+			.ripple-3 {
+				animation-delay: 5s;
+			}
+			@keyframes rippleKF {
+				0% {
+					opacity: 0;
+				}
+
+				30% {
+					opacity: 1;
+				}
+
+				40% {
+					opacity: 0.4;
+					box-shadow: none;
+				}
+
+				80% {
+					opacity: 0.1;
+				}
+
+				100% {
+					opacity: 0;
+					transform:  translate(-50%, -50%) scale(1.5, 1.5);
+					box-shadow: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<i class="logo"></i>
+			<i class="ripple-1 ripple"></i>
+			<i class="ripple-2 ripple"></i>
+			<i class="ripple-3 ripple"></i>
+		</div>
+	</body>
+</html>
