@@ -11,3 +11,6 @@
 
 4. 涟漪动画
 ![alt text](ripple.gif)
+
+4. 爆炸图
+![alt text](expode.gif)
